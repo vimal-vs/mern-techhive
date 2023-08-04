@@ -64,7 +64,7 @@ app.post('/data/add', async(req, res) => {
 app.patch('/data/edit/:name', async(req, res) => {
     try{
         const name = req.params.name;
-        const updateName = req.body.name;
+        const updateName = req.body.updateName;
         const data = await Model.findOneAndUpdate(
             { name: name },
             { name: updateName }
