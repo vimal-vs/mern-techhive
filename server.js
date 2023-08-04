@@ -1,12 +1,10 @@
 const express = require('express');
-const cors = require('cors')
-const http = require('http');
+const cors = require('cors');
 
 const app = express();
-const server = http.createServer(app);
+app.use(cors());
 
 app.use(express.json());
-app.use(cors());
 
 app.set('port',3001);
 
@@ -33,7 +31,7 @@ app.get('/data', async(req, res) => {
     }
 });
 
-app.get('/data/:name', async (req, res) => {
+app.get('/data/:name', async(req, res) => {
     try{
         const name = req.params.name;
         const data = await Model.findOne(
@@ -64,10 +62,11 @@ app.post('/data/add', async(req, res) => {
 app.patch('/data/edit/:name', async(req, res) => {
     try{
         const name = req.params.name;
-        const updateName = req.body.name;
+        const updateName = req.body.updateName;
+        const updateDescription = req.body.updateDescription;
         const data = await Model.findOneAndUpdate(
             { name: name },
-            { name: updateName }
+            { name: updateName, description: updateDescription }
         );
         res.json(data);
     }
@@ -89,4 +88,4 @@ app.delete('/data/delete/:name', async(req, res) => {
     }
 });
 
-server.listen(3001);
+app.listen(3001);
