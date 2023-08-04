@@ -1,9 +1,7 @@
 const express = require('express');
-const cors = require('cors')
-const http = require('http');
+const cors = require('cors');
 
 const app = express();
-const server = http.createServer(app);
 
 app.use(express.json());
 app.use(cors());
@@ -33,7 +31,7 @@ app.get('/data', async(req, res) => {
     }
 });
 
-app.get('/data/:name', async (req, res) => {
+app.get('/data/:name', async(req, res) => {
     try{
         const name = req.params.name;
         const data = await Model.findOne(
@@ -90,4 +88,4 @@ app.delete('/data/delete/:name', async(req, res) => {
     }
 });
 
-server.listen(3001);
+app.listen(3001);
