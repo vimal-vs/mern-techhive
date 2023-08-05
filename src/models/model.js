@@ -5,14 +5,14 @@ const dataSchema = new mongoose.Schema({
         required: true,
         unique: true,
         type: String,
-        min: 1,
-        max: 30
+        minLength: 1,
+        maxLength: 20
     },
     description: {
         required: true,
         type: String,
-        min: 1,
-        max: 100
+        minLength: 1,
+        maxLength: 50
     }
 },{ timestamps: true }
 );
